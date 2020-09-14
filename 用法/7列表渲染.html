@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <script src="../vue.js"></script>
+   <div id="lala">
+      <ol>
+         <li v-for="(value,name) in list" :key="value.id">
+            {{`${value.name} ::: ${name}`}}
+         </li>
+         <li v-for="(v,n,i) in obj">
+            {{`${v} :::: ${v} ::: ${n} ::: ${i} `}}
+         </li>
+      </ol>
+   </div>
+   <script>
+      /**
+       * @description:  
+       * @modifyContent:
+       * @author: lala
+       * @date: 2020-09-13 17:53:28
+      */
+      const lal = new Vue({
+         el: "#lala",
+         data: {
+            list: [
+               {
+                  name: "lala",
+                  id: "user1"
+               },
+               {
+                  name: "yeye",
+                  id: "user2"
+               },
+               {
+                  name: "guagua",
+                  id: "user3"
+               }
+            ],
+            obj: {
+               name: "lala",
+               age: 21,
+               hobby: "play game"
+            }
+         }
+         
+      })
+   </script>
+</body>
+
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <div id="lala">
+      <!-- 类名绑定 -->
+      <div :class="[{active:isActive},'show',isActive?'yes':'no']"></div>
+      <!-- 数组绑定 -->
+      <div :class="[active,name]"></div>
+      <!-- 样式绑定 -->
+      <div class="inner1" :style="styleObj1">恩子</div>
+      <!-- 数组绑定，将多个样式对象绑定到这个对象上，vue会自动添加前缀 -->
+      <div class="inner2" :style="[styleObj1,styleObj2]">哇</div>
+
+   </div>
+   <script src="../vue.js"></script>
+   <script>
+      /**
+       * @description:  
+       * @modifyContent:
+       * @author: lala
+       * @date: 2020-09-13 17:53:34
+      */
+      let lala = new Vue({
+         el: "#lala",
+         data: {
+            isActive: true,
+            // 绑定到一个对象上更加直观
+            styleObj1: {
+               color: "red",
+               backgroundColor: "blue",
+               width: "50px",
+               height: "50px"
+            },
+            styleObj2: {
+               color: "#f0f",
+               width: "50px",
+               height: "50px",
+               backgroundColor: "#0f0"
+            },
+            active:"active",
+            name: "inner-lala"
+         }
+      })
+   </script>
+</body>
+
+</html>

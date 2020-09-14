@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <script src="../vue.js"></script>
+   <div id="lala">
+      <div class="show" v-if="isShow">v-if是一个指令</div>
+      <!-- 一些指令能够多接受一个参数  -->
+      <a v-bind:href="url">一些指令能多接受一个参数</a>
+      <!-- 动态参数，可以绑定元素上的attr。 参数的名最后都会转化为小写 -->
+      <div v-bind:[eventname]="addText">点击</div>
+      <!-- 修饰符 -->
+      <div v-on:submit.prevent="onSubmit">chuf点击是键</div>
+      <!-- 缩写 -->
+      <div :class="inner" @click="onClick" >缩写点击啦啦啦</div>
+   </div>
+   <script>
+      // 指令(Directives)是带有v-前缀的特殊 attribute。指令attribute的值预期是单个JavaScript表达式 (v-for 是例外情况)。
+      // 指令的职责是，当表达式的值改变时，将其产生的连带影响，响应式地作用于 DOM。
+
+      let lala = new Vue({
+         el: "#lala",
+         data: {
+            isShow: true,
+            url: "http://blog.xiaohaimao.cn",
+            eventname: "click",
+            name: "yeye",
+            inner: "suo"
+         },
+         methods: {
+            // eventName(){
+            //    return "click"
+            // }
+            addText() {
+               console.log("ysesd");
+               console.log(this);
+            },
+            onSubmit: function (e) {
+               console.log("45878");
+            },
+            onClick(e){
+               console.log("点击显示了");
+            }
+         }
+      })
+
+   </script>
+</body>
+
+</html>

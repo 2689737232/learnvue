@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <div id="lala">
+      <wa v-for="(item,index) in list" :key="item.id" :name="item.data"></wa>
+   </div>
+   <script src="../vue.js"></script>
+   <script>
+      /**
+       * @description:  组件的使用
+       * @modifyContent:
+       * @author: lala
+       * @date: 2020-09-14 09:09:39
+      */
+      // 定义组件
+      Vue.component('wa', {
+         //[数组形式] 添加属性，父组件向子组件通信 
+         props:[
+            'name'
+         ],
+         // [对象形式] 添加属性，父组件向子组件通信
+         // props: {
+         //    name: String,
+         // },
+         data: function () {
+            return {
+               value: "**我是值**",
+               sayHi() {
+                  console.log("hi");
+               }
+            }
+         },
+         // 每个组件都必须有  一个  根元素
+         template: `
+         <div class="inner" @click="sayHi">
+            {{\`我是inner组件，我的值是：\${value}\` }} {{\`\${name}\`}}
+         </div>
+         `
+      });
+
+      const lala = new Vue({
+         el: "#lala",
+         data: {
+            // 同于向子组件传递的数据
+            list: [
+               {
+                  id: 1,
+                  data: "太小声 还想开军舰"
+               },
+               {
+                  id: 2,
+                  data: "哇 很有精神"
+               },
+               {
+                  id: 3,
+                  data: "爱你哦 小哥哥买茶吗"
+               },
+            ]
+         }
+      })
+   </script>
+</body>
+
+</html>

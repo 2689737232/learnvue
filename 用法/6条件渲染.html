@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+ 
+</head>
+
+<body>
+
+   <div id="lala">
+      /**
+       * @description:  
+       * @modifyContent:
+       * @author: lala
+       * @date: 2020-09-13 17:53:18
+      */
+      <!-- v-if会条件性的渲染 -->
+      <template v-if="ok">
+         <p>如果使用v-if在template上面，最后渲染出来不会带有template</p>
+         <span>yes</span>
+      </template>
+      <div class="yeye" v-else>同样可以使用v-else</div>
+      <!-- v-show 渲染后会保留在dom中,只是更改了元素的display属性。但是不支持template -->
+      <span class="say" v-show="say">说说你的看法</span>*****看看
+   </div>
+   <script src="../vue.js"></script>
+   <script>
+      let lala = new Vue({
+         el: "#lala",
+         data:{
+            ok: true,
+            say: true
+         }
+      })
+   </script>
+</body>
+
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <script src="../vue.js"></script>
+   <div id="app-4">
+      <ol>
+         <li v-for="p in li" v-on:click="click(p)">
+            {{ "♂" +  p.text +"yes" + true }}
+         </li>
+      </ol>
+      <input type="text" v-model="model"> {{`yes${model}yes`}}
+      <lala v-for="p in list" v-bind:value="p"> </lala>
+   </div>
+   <script>
+      // 组件 在 Vue 里，一个组件本质上是一个拥有预定义选项的一个 Vue 实例。在
+      Vue.component('lala', {
+         props: ['value'],
+         template: `<div class="lala">东京佛{{value.text}}</div>`   // 通过这个父级上的属性p获取数据
+      });
+      let app4 = document.getElementById("app-4");
+
+      var app = new Vue({
+         el: '#app-4',
+         data: {
+            li: [
+               { text: '学习 JavaScript' },
+               { text: '学习 Vue' },
+               { text: '整个牛项目' }
+            ],
+            model: "内容",
+            list: [
+               { id: 0, text: '蔬菜' },
+               { id: 1, text: '奶酪' },
+               { id: 2, text: '随便其它什么人吃的东西' }
+            ]
+         },
+         methods: {
+            click(p) {
+               let text = p.text.split('').reverse().join("")
+               p.text = text;
+            }
+         },
+         /**
+         * 各类生命周期函数
+         */
+         created() {
+            // Vue实例创建后的触发函数  里面的this指向实例
+            console.log(this, "创建完毕");
+         },
+         beforeMount(){
+            console.log(this.$el == app4);
+         },
+         mounted(){
+            console.log(this,"挂载完毕");
+            // 在当传入vue实例后，在mounted之前vue会闯创建一个 vm.$el将原本的domel给替换。
+            console.log(app4 == this.$el);   // false
+         },
+         // 当数据发生改变时
+         updated(){
+            console.log(this,"完成重新渲染后。触发updated方法，更新完毕");
+         },
+         destroyed(){
+            console.log(this,"销毁完毕");
+         }
+
+      });
+      app.li.push({ text: "哇 很有精神" });
+
+      /**
+            除了数据 property，Vue 实例还暴露了一些有用的实例 property 与方法。它们都有前缀 $，以便与用户定义的 property 区分开来。
+      */
+      // 指向 el
+      console.log(app.$el, app.$el === document.getElementById("app-4"));
+      console.log(app.$data);
+      // 监听函数
+      app.$watch('model', function (newValue, oldValue) {
+         console.log("改变了");
+         console.log(newValue, oldValue);
+      })
+   </script>
+</body>
+
+</html>

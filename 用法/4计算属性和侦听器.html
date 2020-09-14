@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <script src="../vue.js"></script>
+   <div id="lala">
+      <div class="inner">{{value}}{{getPI}}</div>
+   </div>
+   <script>
+      let lala = new Vue({
+         el: "#lala",
+         data: {
+            value: "数据",
+            message: "123456"
+         },
+         computed: {
+            // 计算属性会缓存，
+            getPI(){
+               // 只要message没有发生改变  多次使用，那么存的是之前的值。
+               return this.message.split('').reverse().join('');
+               // 因为 Date.now() 不是响应式依赖 所以每次使用都会执行。
+               // return Date();
+            }
+         },
+         // 监听数据变化
+         watch:{
+            value(nowVlaue,preValue){
+               console.log(preValue,nowVlaue);
+            }
+         }
+      })
+
+   </script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <script src="../vue.js"></script>
+   <div id="lala">
+      <span v-once>里面的内容只会渲染一次{{value}}</span>
+      <p>Using mustaches: {{ rawHtml }}</p>
+      <!-- v-html的值会被后面绑定的值更改 -->
+      <p>Using v-html directive: <span v-html="rawHtml"></span></p>
+      <!-- Mustache 语法不能作用在 HTML attribute 上，遇到这种情况应该使用 v-bind 指令： -->
+      <p v-bind:id="myId"></p>
+      <!-- 如果isTrue为false null undefined 那么my-attr都不会出现在这个元素上 -->
+      <p v-bind:my-attr="isTrue">{{Date()}}</p>
+   </div>
+   <script>
+      let lala = new Vue({
+         el: "#lala",
+         data: {
+            value: "不会改变的值",
+            rawHtml: ` <div style="color: red">This should be red.</div>`,
+            myId: "wa",
+            isTrue: (null || undefined || false)
+         }
+      });
+
+   </script>
+</body>
+
+</html>
