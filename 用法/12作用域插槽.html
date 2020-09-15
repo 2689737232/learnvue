@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <div id="lala">
+      <!-- 如果想在父级中使用子组件的数据 -->
+      <!-- 绑定在 <slot> 元素上的 attribute 被称为插槽 prop。 -->
+      <!-- 现在在父级作用域中，我们可以使用带值的 v-slot 来定义我们提供的插槽 prop 的名字 -->
+      <!-- 具名插槽的缩写 v-slot:可以缩写为# -->
+      <wa>
+         <!-- 通过v-slot:[子组件中slot的name属性值]，slotProps为自己顺便取的名字 -->
+         <template #slot1="slotProps">
+            <!-- slotProps为子组件中slot的绑定的属性值 -->
+            {{slotProps.yes}}<br />
+         </template>
+
+         <!-- 插槽2，可以通过解构赋值的形式 -->
+         <template #slot2="{yeyeName : name,yeyeAge:age}">
+            <!-- slotProps为子组件中slot的绑定的属性值 -->
+            我叫 {{name}} 我的年龄是 {{age}}
+         </template>
+      </wa>
+   </div>
+   <script src="../vue.js"></script>
+   <script>
+      Vue.component("wa", {
+         data: () => ({
+            user: {
+               name: "我的名字叫啦啦wa",
+               age: 21
+            },
+            yes: "yes",
+            yeye: {
+               name: "yeye",
+               age: 25
+            }
+         }),
+         template: `
+            <div class="wa">
+               <slot name="slot1" :yes="yes" v-bind:user="user"></slot>
+               <slot name="slot2" :yeyeName="yeye.name" :yeyeAge="yeye.age"></slot>
+            </div>
+         `
+      })
+      new Vue({
+         el: "#lala",
+         data: {
+
+         }
+      })
+   </script>
+</body>
+
+</html>

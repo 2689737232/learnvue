@@ -9,31 +9,38 @@
 
 <body>
    <div id="lala">
+      <!-- 为子组件绑定原生事件 -->
       <wa v-on:focus.native="onFocus" @my-event="doSome"></wa>
+      <ye  @my-focus="onFocus"></ye>
    </div>
    <script src="../vue.js"></script>
    <script>
       Vue.component("wa", {
          template: `
-            <input type="number"/>
+            <input type="number" @click="$emit('doSome')"/>
          `,
          data: function () {
             return {
             }
-         },
-         created() {
-            this.$emit("my-event");
+         }
+      });
+      Vue.component("ye", {
+         template: `
+            <input type="number" @focus="$emit('my-focus')"/>
+         `,
+         data: function () {
+            return {
+            }
          }
       });
       const lala = new Vue({
          el: "#lala",
          methods: {
-            onFocus: function (e) {
-               console.log("yes foucs", this);
-               this.$emit("doSome")
-            },
             doSome() {
                console.log("触发了组件上自定义事件。");
+            },
+            onFocus(){
+               console.log("我被关注了");
             }
          }
       })

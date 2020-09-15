@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <!-- 父级模板里的所有内容都是在父级作用域中编译的；子模板里的所有内容都是在子作用域中编译的。 -->
+   <!-- 在父组件中使用子组件，在使用的子组件标签中是用不了子组件的数数据 -->
+   <div id="lala">
+      <!--{{myHtml}}中的以文本方式，<h4>可以天机</h4> 会被当成dom渲染，包括其他的组件  -->
+      <alert-box>{{myHtml}} <h4>可以天机</h4></alert-box>
+
+      <!-- 额外插槽 -->
+      <ex>
+         <!-- 通过template标签，v-slot指令指定name -->
+         <!-- 注意 v-slot 只能添加在 <template> 上 -->
+         <template v-slot="slot1">传入slot1的数据</template>
+         <template v-slot="slot2">传入slot2的数据</template>
+
+      </ex>
+   </div>
+   <script src="../vue.js"></script>
+   <script>
+      Vue.component('alert-box', {
+         template: `
+           <div class="demo-alert-box">
+             <!-- 定义插槽，在引用子组件时添加的内容都会放在这里面。 -->
+             <!-- 如果不传入，会使用这个默认值 -->
+             <slot>默认值、后备内容</slot>
+           </div>
+         `
+      });
+
+      // 额外的插槽
+      Vue.component('ex', {
+         template: `
+           <div class="demo-alert-box">
+              <!-- 通过name指定 -->
+             <slot name="slot1">默认值、后备内容1</slot>
+             <hr/>
+             <slot name="slot2">默认值、后备内容2</slot>
+           </div>
+         `
+      });
+
+
+
+
+
+      new Vue({
+         el: "#lala",
+         data: {
+            myHtml: `
+               <div><h3>wa很有精神</h3></div>
+            `
+         }
+      })
+   </script>
+</body>
+
+</html>
