@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <div id="lala">
+      <wa v-on:focus.native="onFocus" @my-event="doSome"></wa>
+   </div>
+   <script src="../vue.js"></script>
+   <script>
+      Vue.component("wa", {
+         template: `
+            <input type="number"/>
+         `,
+         data: function () {
+            return {
+            }
+         },
+         created() {
+            this.$emit("my-event");
+         }
+      });
+      const lala = new Vue({
+         el: "#lala",
+         methods: {
+            onFocus: function (e) {
+               console.log("yes foucs", this);
+               this.$emit("doSome")
+            },
+            doSome() {
+               console.log("触发了组件上自定义事件。");
+            }
+         }
+      })
+   </script>
+</body>
+
+</html>

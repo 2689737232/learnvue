@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <div id="lala">
+      <!-- class这个attribute会直接添加到 wa这个组件的根元素上,class和style会进行合并 -->
+      <wa v-for="(item,index) in list" :key="item.id" :post="item" jj="jjjj" class="actived"></wa>
+   </div>
+   <script src="../vue.js"></script>
+   <script>
+      /**
+       * @description: 组件使用  数据传递 
+       * @modifyContent:
+       * @author: lala
+       * @date: 2020-09-14 09:45:12
+      */
+      // 定义组件
+      Vue.component('wa', {
+         // 禁用属性继承，当父组件在使用<wa class="xxx"></wa> 子组件时，是否禁用继承传入的属性。
+         // inheritAttrs: false 选项不会影响 style 和 class 的绑定。
+         inheritAttrs: false,
+         // post这个属性可以接受 数字、布尔、数组、对象、
+         // 在子组件中 不应该更新 props中的prop。
+         // 注意在 JavaScript 中对象和数组是通过引用传入的
+         //   所以对于一个数组或对象类型的 prop 来说，在子组件中改变变更这个对象或数组本身将会影响到父组件的状态。
+         props: {
+            post: Object,
+            // 可以指定多个类型  String Number Boolean Array Object Date Function Symbol
+            propA: [String, Number],
+            // 带有默认值的数字
+            propD: {
+               type: Number,
+               default: 100
+            },
+            // 带有默认值的对象
+            propE: {
+               type: Object,
+               // 对象或数组默认值必须从一个工厂函数获取
+               default: function () {
+                  return { message: 'hello' }
+               }
+            },
+            // 还可以接受一个构造函数
+            propF: function (firstName, lastName) {
+               this.firstName = firstName
+               this.lastName = lastName
+            }
+         },
+         data: function () {
+            return {
+               value: "**我是值**",
+               sayHi() {
+                  console.log("hi");
+               }
+            }
+         },
+         // 每个组件都必须有  一个  根元素
+         template: `
+         <div class="inner" @click="sayHi"> 
+            当组件中获取传递的参数多了后，为每个参数绑定比较麻烦 ****
+            我叫{{\`\${post.name}\`}}|我的年纪是 {{\`\${post.age}\`}}我的爱好是  {{\`\${post.hobby}\`}}   
+         </div>
+         `
+      });
+
+      const lala = new Vue({
+         el: "#lala",
+         data: {
+            // 同于向子组件传递的数据
+            list: [
+               {
+                  id: 1,
+                  name: "太小声 还想开军舰",
+                  age: 21,
+                  hobby: "打game"
+               },
+               {
+                  id: 2,
+                  name: "哇 很有精神",
+                  age: 31,
+                  hobby: "说一些小🐓"
+               },
+               {
+                  id: 3,
+                  name: "爱你哦 小哥哥买茶吗",
+                  age: 20,
+                  hobby: "做绿茶"
+               },
+               {
+                  id: 4,
+                  name: "多人运动领头羊 40的小男孩",
+                  age: 40,
+                  hobby: "multi play"
+               }
+            ]
+         }
+      })
+   </script>
+</body>
+
+</html>
