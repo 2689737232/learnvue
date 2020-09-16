@@ -10,6 +10,7 @@
 <body>
    <div id="lala">
       <wa v-for="(item,index) in list" :key="item.id" :name="item.data"></wa>
+      <component is="">内容</component>
    </div>
    <script src="../vue.js"></script>
    <script>
@@ -22,7 +23,7 @@
       // 定义组件
       Vue.component('wa', {
          //[数组形式] 添加属性，父组件向子组件通信 
-         props:[
+         props: [
             'name'
          ],
          // [对象形式] 添加属性，父组件向子组件通信
@@ -41,10 +42,10 @@
          template: `
          <div class="inner" @click="sayHi">
             {{\`我是inner组件，我的值是：\${value}\` }} {{\`\${name}\`}}
+            <slot name="slot1"></slot>
          </div>
          `
       });
-      
       const lala = new Vue({
          el: "#lala",
          data: {
@@ -62,7 +63,8 @@
                   id: 3,
                   data: "爱你哦 小哥哥买茶吗"
                },
-            ]
+            ],
+            componentName: "wa"
          }
       })
    </script>

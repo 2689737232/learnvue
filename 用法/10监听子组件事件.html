@@ -21,7 +21,8 @@
          template: `
            <div class="blog-post">
              <h3>{{ post.title }}</h3>
-             <button @click="$emit('text')">
+             <!-- 通过在子组件中 触发函数，添加第二个参数传递到父组件 -->
+             <button @click="$emit('text','可以添加第二个参数为$event')">
                Enlarge text
              </button>
              <div v-html="post.content"></div>
@@ -42,7 +43,8 @@
             }
          },
          methods: {
-            text() {
+            text($event) {
+               console.log($event);
                this.postFontSize += 0.1;
             }
          }
