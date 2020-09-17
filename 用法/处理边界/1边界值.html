@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <div id="lala">
+      <ye></ye>
+   </div>
+   <script src="../../vue.js"></script>
+   <script>
+      Vue.component("ye",{
+         template:`
+            <div>内部的子组件</div>
+         `,
+         data(){
+            return {
+
+            }
+         },
+         created(){
+             // 在子组件汇中 通过$parent拿到父组件,但是这会导致更加难以调试
+            console.log(this.$parent,"我是子组件的打印");
+         }
+      })
+
+      const lala  = new Vue({
+         el:"#lala",
+         data:{
+            wa:"很有精神"
+         },
+         computed:{
+            getDate(){
+               return new Date();
+            }
+         },
+         methods:{
+            sayHi(){
+               console.log("Hi");
+            }
+         }
+      });
+      // 对于小型的项目可以通过这种方式拿到一些数据，但是对于大型项目通过vuex来管理
+      console.log(lala.$root.wa,lala.$root.getDate,lala.$root.sayHi()  );
+    
+   </script>
+</body>
+
+</html>

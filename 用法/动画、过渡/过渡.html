@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+   <style>
+      .fade-enter-active, .fade-leave-active {
+         transition: opacity .5s;
+       }
+       .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+         opacity: 0;
+       }
+       .wa-enter-active,.wa-leave-active{
+          transition: opacity 0.5s;
+       }
+       .wa-enter, .wa-leave-to /* .fade-leave-active below version 2.1.8 */ {
+         opacity: 0;
+       }
+   </style>
+</head>
+
+<body>
+  
+
+   <div id="lala">
+      <button @click="show =!show">点我啊！</button>
+      <transition name="fade">
+         <span v-show="show">哇 很有精神</span>
+       </transition>
+       <transition name="wa">
+         <span v-show="!show">我淦 我简直帅得要死！</span>
+       </transition>
+   </div>
+   <script src="../../vue.js"></script>
+   <script>
+      let lala = new Vue({
+         el: "#lala",
+         data: {
+            show: true
+         }
+      })
+   </script>
+</body>
+
+</html>

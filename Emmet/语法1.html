@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <!-- div>(header>ul>li*2>a)+footer>p  -->
+   <div>
+      <header>
+         <ul>
+            <li><a href=""></a></li>
+            <li><a href=""></a></li>
+         </ul>
+      </header>
+      <footer>
+         <p></p>
+      </footer>
+   </div>
+
+   <!-- 属性 [div#header+div.page+div#footer.class1.class2.class3] -->
+   <div id="header"></div>
+   <div class="page"></div>
+   <div id="footer" class="class1 class2 class3"></div>
+   <!-- 自定义属性 td[title="wa" colspan=3] -->
+   <td title="wa" colspan="3"></td>
+
+   <!-- Item numbering: $ -->
+   <!-- [.item$*4] -->
+   <div class="item1"></div>
+   <div class="item2"></div>
+   <div class="item3"></div>
+   <div class="item4"></div>
+   <!-- 同样可以使用多个$ 表示类名后的数字有几位 [.item$$$*3] -->
+   <div class="item001"></div>
+   <div class="item002"></div>
+   <div class="item003"></div>
+
+
+   <!-- Text: {} -->
+   <!-- 使用{}生成内容   div{我是啦啦}*3 -->
+   <div>我是啦啦</div>
+   <div>我是啦啦</div>
+   <div>我是啦啦</div>
+
+   <p>内容哦</p>
+   <div class="lala">哇 很有精神</div>
+
+   <!-- 添加内容 ul.generic-list>lorem10.item*4 -->
+   <ul class="generic-list">
+      <li class="item">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam, facere.</li>
+      <li class="item">Animi nemo odio repellendus veniam ducimus ab nam quo similique.</li>
+      <li class="item">Soluta, quam est. Aliquid hic non alias delectus eos doloribus.</li>
+      <li class="item">Dolorum expedita animi reprehenderit eum aliquam nulla vero laudantium sint.</li>
+   </ul>
+</body>
+
+</html>

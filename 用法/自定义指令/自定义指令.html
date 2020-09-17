@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <div id="lala">
+      <input type="text" v-focus="'附加参数'">
+      <!-- 可以传入任何js表达式 -->
+      <span v-wa="{name:'lala',age:21}"></span>
+   </div>
+   <script src="../../vue.js"></script>
+   <script>
+      /**
+       * @description:  
+       * @modifyContent:
+       * @author: lala
+       * @date: 2020-09-17 19:07:12
+       */
+      // 自定义指令  【全局指令】
+      Vue.directive('focus', {
+         // 当被绑定的元素插入到 DOM 中时……
+         inserted: function (el, binding, vnode, oldVnode) {
+            console.log("被绑定的元素插入DOM中了。。");
+            // 聚焦元素
+            el.focus();
+         }
+      });
+      let lala = new Vue({
+         el: "#lala",
+         data: {
+            wa: 45
+         },
+         computed: {
+            getInput() {
+               return document.getElementById("lala").getElementsByTagName("input")[0];
+            }
+         },
+         // 【局部指令】
+         // 指令的钩子函数
+         directives: {
+            focus: {
+               // 只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。
+               // 一个指令钩子函数 中会被传入 el,binding,vnode,oldVnode 这些参数
+               // 其它参数都应该是只读的，切勿进行修改。如果需要在钩子之间共享数据，建议通过元素的 dataset 来进行
+               bind(el, binding, vnode, oldVnode) {
+                  console.log("我被绑定了 我只被执行一次");
+                  console.log(el, binding, vnode, oldVnode);
+                  // 指令中的参数
+                  let args = binding.value;
+                  el.value = `我是参数${args}`;
+               },
+               inserted: function (el) {
+                  console.log(el);
+                  el.focus()
+               },
+               update() {
+
+               },
+               // vnode和子vnode全部更新后调用
+               componentUpdated() {
+               },
+               // 指令与元素解绑时候
+               unbind() {
+                  console.log("我解绑了");
+               }
+            },
+            wa: {
+               bind(el, binding, vnode, oldVnode) {
+                  let obj = binding.value;
+                  let h = '';
+                  for (let p in obj) {
+                     h += obj[p]
+                  }
+                  el.innerHTML += h;
+               }
+            }
+         }
+      })
+
+
+   </script>
+</body>
+
+</html>

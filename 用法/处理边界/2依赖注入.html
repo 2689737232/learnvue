@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Document</title>
+</head>
+
+<body>
+   <div id="lala">
+      <wa></wa>
+   </div>
+   <script src="../../vue.js"></script>
+   <script>
+      // 然而，依赖注入还是有负面影响的。
+      // 它将你应用程序中的组件与它们当前的组织方式耦合起来，使[重构变得更加困难]。
+      // 同时所提供的 property 是[非响应式]的。
+      //  这是出于设计的考虑，因为使用它们来创建一个中心化规模化的数据跟[使用 $root做这件事都是不够好的]。
+      //  如果你想要共享的这个 property 是你的应用特有的，而不是通用化的，或者如果你想在祖先组件中更新所提供的数据，
+      // 那么这意味着你可能需要换用一个像 [Vuex] 这样真正的状态管理方案了。
+      Vue.component("ye", {
+         template: `
+            <div>内部的子组件 ye </div>
+         `,
+         data() {
+            return {
+
+            }
+         }
+      })
+      Vue.component("wa", {
+         template: `
+            <div>内部的子组件 wa </div>
+         `,
+         data() {
+            return {
+               yes:"yse"
+            }
+         },
+         // 在任何一个组件中都可以使用父组件provide中提供的内容
+         inject: ["getParentData"],
+         created(){
+            // getParentData中的this为子组件，
+            console.log(this.getParentData());
+         }
+      })
+
+      const lala = new Vue({
+         el: "#lala",
+         data: {
+            z: "我是你们的祖宗"
+         },
+         provide() {
+            return {
+               getParentData() {
+                  return this;
+               }
+            }
+         }
+      });
+
+
+   </script>
+</body>
+
+</html>
